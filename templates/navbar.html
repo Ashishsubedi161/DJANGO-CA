@@ -1,0 +1,40 @@
+<!-- navbar.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navbar</title>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="/profile/"></a>profile</li>
+            <li>{{ request.COOKIES.username }}</li>  <!-- Display username from cookie -->
+            <li><a href="#" onclick="logout()">Logout</a></li>
+        </ul>
+    </nav>
+</body>
+</html>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var username = getCookie('username');
+        if (username) {
+            document.getElementById('usernamePlaceholder').innerText = 'Welcome, ' + username;
+           
+        }
+    });
+
+    function logout() {
+        document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        window.location.href = "{% url 'logout' %}";  // Replace 'logout' with the actual URL name for logout view
+    }
+
+    function getCookie(name) {
+        var value = "; " + document.cookie;
+        var parts = value.split("; " + name + "=");
+        if (parts.length == 2) return parts.pop().split(";").shift();
+    }
+</script>

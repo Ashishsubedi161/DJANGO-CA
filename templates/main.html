@@ -1,0 +1,65 @@
+<!-- main.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+    <script>
+        function toggleJobPostingForm() {
+            var jobPostingForm = document.getElementById("jobPostingForm");
+            var applyForm = document.getElementById("applyForm");
+            jobPostingForm.style.display = "block";
+            applyForm.style.display = "none";
+        }
+
+        function toggleApplyForm() {
+            var jobPostingForm = document.getElementById("jobPostingForm");
+            var applyForm = document.getElementById("applyForm");
+            jobPostingForm.style.display = "none";
+            applyForm.style.display = "block";
+        }
+    </script>
+</head>
+<body>
+    <!-- main.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+</head>
+<body>
+    {% include 'navbar.html' %}
+
+
+
+</body>
+</html>
+
+    <h1>Welcome to the Main Page</h1>
+
+
+    <button onclick="toggleJobPostingForm()">Create Job Posting</button>
+    <button onclick="toggleApplyForm()">Apply for Job</button>
+
+    <div id="jobPostingForm" style="display: none;">
+        <h2>Create Job Position</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ job_position_form.as_p }}
+            <button type="submit">Create Job Position</button>
+        </form>
+    </div>
+
+    <div id="applyForm" style="display: none;">
+        <h2>Apply for Job</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ apply_form.as_p }}
+            <button type="submit">Apply</button>
+        </form>
+    </div>
+</body>
+</html>
